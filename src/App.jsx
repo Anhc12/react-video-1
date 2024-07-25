@@ -9,14 +9,10 @@ import { useState } from 'react'
 
 const App= () => {
   const [todoList, setTodoList]= useState([
-    {id: 1, name: "Learning React"},
-    {id: 2, name: "Watching Youtube"}
+    // {id: 1, name: "Learning React"},
+    // {id: 2, name: "Watching Youtube"}
   ])
-  const anhc = " hoang anh Cityzen";
-  const age = 25;
-  const data ={address: "hanoi",
-    country : "vietNam"
-  }
+  
 
   const addNewTodo = (name) =>{
     const newTodo = {
@@ -37,11 +33,6 @@ return Math.floor(Math.random() * (max - min + 1) + min);
       <TodoNew 
        addNewTodo={addNewTodo}/>
       <TodoData 
-      
-
-      name = {anhc}
-      age = {age}
-      data = {data}
       todoList={todoList}
       
       />
