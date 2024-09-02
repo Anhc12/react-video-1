@@ -3,6 +3,8 @@ import { Button, Flex } from 'antd';
 import { convertLegacyProps } from "antd/es/button";
 import ColumnGroup from "antd/es/table/ColumnGroup";
 import { useState } from "react";
+import axios from "axios";
+import Password from "antd/es/input/Password";
 const UserForm = () => {
   const [fullName, setFullName] = useState("")
   const [email, setEmail] = useState("")
@@ -10,6 +12,15 @@ const UserForm = () => {
   const [phone, setPhone] = useState("")
 
   const handleClickBtn = () => {
+    const URL_BACKEND = "http://localhost:8080/api/v1/user"
+    const data = {
+      fullName: fullName,
+      email: email,
+      Password: pasword,
+      phone: phone
+
+    }
+    axios.post(URL_BACKEND)
     console.log("check form ", { fullName, email, pasword, phone })
   }
   return (
