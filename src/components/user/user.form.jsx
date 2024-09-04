@@ -1,27 +1,27 @@
-import { Input } from "antd";
+import { Input, notification } from "antd";
 import { Button, Flex } from 'antd';
 import { convertLegacyProps } from "antd/es/button";
 import ColumnGroup from "antd/es/table/ColumnGroup";
 import { useState } from "react";
-import axios from "axios";
+
 import Password from "antd/es/input/Password";
+import { createUserAPI } from "../../sevices/api.sevice";
 const UserForm = () => {
   const [fullName, setFullName] = useState("")
   const [email, setEmail] = useState("")
-  const [pasword, setPasword] = useState("")
+  const [password, setPasword] = useState("")
   const [phone, setPhone] = useState("")
 
-  const handleClickBtn = () => {
-    const URL_BACKEND = "http://localhost:8080/api/v1/user"
-    const data = {
-      fullName: fullName,
-      email: email,
-      Password: pasword,
-      phone: phone
-
+  const handleClickBtn = async () => {
+    const res = await createUserAPI(fullName, email, password, phone)
+    console.log("check res : ", res)
+    if (res.data) {
+      notification.success({
+        message: "create user",
+        description: "tạo user thành công"
+      })
+      console.log("check res ", res.data.data)
     }
-    axios.post(URL_BACKEND)
-    console.log("check form ", { fullName, email, pasword, phone })
   }
   return (
     <div className="user-form" style={{ margin: "20px 0" }}>
@@ -40,7 +40,7 @@ const UserForm = () => {
         <div>
           <span>Password</span>
           <Input.Password
-            value={pasword}
+            value={password}
             onChange={(event) => { setPasword(event.target.value) }}
           />
         </div>
